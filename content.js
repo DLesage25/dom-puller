@@ -3,9 +3,7 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.message === "clicked_browser_action") {
 
-            var firstHref = $(".menu-item a").html();
-
-            // console.log(firstHref);
+            var firstHref = $(request.query).html();
 
             var payload = { "message": firstHref, "type": "fetch" };
 
@@ -14,5 +12,4 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-
-
+//todo: get zendesk paths
