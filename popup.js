@@ -1,21 +1,13 @@
 'use strict';
 
+//set result in popup 
 function setResult(info) {
-
     document.getElementById('text').innerHTML = info;
-
-    var request = new XMLHttpRequest(),
-        send_url = "http://requestb.in/17h1nva1",
-        params = "data=" + info;
-
-    request.open("POST", send_url, true);
-    request.send(params);
-
 }
 
+//send onclick to background
 function queryTabs(query) {
 
-    // ...query for the active tab...
     chrome.tabs.query({
         active: true,
         currentWindow: true
@@ -25,7 +17,7 @@ function queryTabs(query) {
 
 }
 
-// Once the DOM is ready...
+// get query from popup
 window.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('my_form').onsubmit = function() {
@@ -36,13 +28,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
         return false;
     }
-
-    // var query = $('#my_form input').html();
-    // queryTabs(query);
-
 });
 
-function testResults(form) {
-    let query = form.query.value;
-    queryTabs(query);
-}
+//get tab URL
+chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+  console.log(tabs[0].url);
+});

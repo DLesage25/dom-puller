@@ -1,4 +1,6 @@
-// content.js
+'use strict';
+
+//get query from popup.js and fetch object's innerHTML
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.message === "clicked_browser_action") {
@@ -12,4 +14,13 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
 //todo: get zendesk paths
+
+//get button object and set onclick
+//currently not working
+$(function() {
+    $('.save').click(function() {
+        console.log('ticket_submit_buttons');
+    })
+});
