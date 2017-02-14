@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "Automated Ticket Allocator",
+    "description": "This extension extracts agent name and ticket ID per submission from Zendesk",
+    "version": "1.0",
+    "browser_action": {
+        "default_icon": "img/icon.png",
+        "default_title": "Click here!"
+    },
+    "background": {
+        "scripts": [
+            "./build/js/background.js"
+        ]
+    },
+    "permissions": [
+        "tabs", "activeTab", "storage",
+        "identity", "identity.email",
+        "https://accounts.google.com/o/oauth2/token",
+        "http://*.zendesk.com/", "https://*.zendesk.com/",
+        "http://*.desk.com/", "https://*.desk.com/",
+        "http://support.udemy.com/", "https://support.udemy.com/"
+    ],
+    "oauth2": {
+        "client_id": "943332422854-374br5pp9sgeg91qd8imkd2ohsj93hfd.apps.googleusercontent.com",
+        "scopes": [
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile"
+        ]
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>", "http://www.google.com/robots.txt*"],
+        "js": ["./build/js/jquery-2.2.4.min.js", "./build/js/content.js"]
+    }],
+    "key": "bidkkfbhfkenimbpplgpfoaibnfgaegc"
+}

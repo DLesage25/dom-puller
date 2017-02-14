@@ -19,8 +19,12 @@ chrome.runtime.onMessage.addListener(
 
 //get button object and set onclick
 //currently not working
+// $(function() {
+//     $('.save').click(function() {
+//         console.log('ticket_submit_buttons');
+//     })
+// });
+
 $(function() {
-    $('.save').click(function() {
-        console.log('ticket_submit_buttons');
-    })
+$( ".save" ).prepend( "<div id=\"allocator_target\"></div>" );
 });

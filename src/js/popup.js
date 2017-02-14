@@ -31,6 +31,6 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 //get tab URL
-chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-  console.log(tabs[0].url);
+chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
+    console.log(tabs[0].url);
 });
