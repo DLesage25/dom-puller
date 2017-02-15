@@ -11,7 +11,7 @@ var named = require('vinyl-named');
 var webpack = require('gulp-webpack');
 
 var files = {
-    js: ['./src/js/*.js']
+    js: ['./src/js/*.js','./src/js/contentScripts/*.js']
 };
 
 // Lint Task
