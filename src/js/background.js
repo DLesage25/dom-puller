@@ -2,48 +2,29 @@
 
 //basic config object
 var config = {
-    'query': '.save',
-    'push_url': 'http://requestb.in/17h1nva1'
-};
+        'query': '.save',
+        'push_url': 'http://requestb.in/17h1nva1'
+    },
+    PageCheck = require('./PageCheck.js');
 
-// chrome.runtime.sendMessage('extension_id', config, { includeTlsChannelId: false }, function() {
-//     console.log('Application online');
-// })
-
-chrome.browserAction.onClicked.addListener(setup);
-
-//get query and post to requestbin
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.type === "fetch") {
-            console.log(request);
-        }
-    }
-)
-
-function setIcon() {
-    console.log('ran');
-}
+chrome.browserAction.onClicked.addListener(run);
 
 //setup function, gets the user's profile
-function setup() {
+function run() {
 
-    // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    //     console.log('authenticated: ' + token);
-    // });
+    //email retrieve
+    chrome.identity.getProfileUserInfo(function(object) { console.log(object.email); });
 
-     chrome.identity.getProfileUserInfo( function(object){ console.log(object.email); } )
+    PageCheck().get('Ticket')
+        .then(function(result) {
+            console.log(result);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 
-};
+}
 
-//callback function, once response with user info is received
-function logIn(resp, xhr) {
-    console.log(resp);
-};
-
-//logs out and clears tokens
-function logout() {
-    setIcon();
-};
-
-//setIcon();
+function setResult(data) {
+    console.log(data);
+}
