@@ -2,8 +2,14 @@
 
 //basic config object
 var config = {
-        'query': '.save',
-        'push_url': 'http://requestb.in/17h1nva1'
+        'push_url': 'http://requestb.in/17h1nva1',
+        'params': {
+            'threshold' : {
+                'amount' : 12,
+                'unit' : 'hours'
+            }
+        },
+        'target': 'Ticket'
     },
     PageCheck = require('./PageCheck.js');
 
@@ -15,7 +21,7 @@ function run() {
     //email retrieve
     chrome.identity.getProfileUserInfo(function(object) { console.log(object.email); });
 
-    PageCheck().get('Ticket')
+    PageCheck().get(config.target, config.params)
         .then(function(result) {
             console.log(result);
         })
