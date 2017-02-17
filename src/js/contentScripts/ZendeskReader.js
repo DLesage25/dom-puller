@@ -22,11 +22,14 @@ ZD.getInfo = function(ticketId) {
         user: {}
     };
 
+    // Higher level variable to check if the user ID exists 
+    var userId = '';
+
     return ZD.getTicket(ticketId)
         // Get the information of the ticket and add it to the {info} object
         .then(function(response) {
-            var ticket = response.ticket;
 
+            var ticket = response.ticket;
             var userId = ticket.assignee_id;
 
             info.ticket.id = ticket.id;
@@ -37,9 +40,21 @@ ZD.getInfo = function(ticketId) {
             info.ticket.updated_at = ticket.updated_at;
             info.ticket.created_at = ticket.created_at;
 
-            if (!userId) throw 'Unassigned ticket';
+            return ZD.getTicketMetrics(ticketId);
+        })
+        // Get the ticket's responses and reply time and add it to the {info} object
+        .then(function(response) {
 
-            return ZD.getUser(userId);
+            info.ticket.replies = response.ticket_metric.replies;
+            info.ticket.reply_time_in_minutes = response.ticket_metric.reply_time_in_minutes.business;
+
+            //if the user ID exists, get the user info. If not, return the {info} object
+            if (userId) {
+                return ZD.getUser(userId)
+            } else {
+                return info;
+            }
+
         })
         // Get the information of the user and add it to the {info} object
         .then(function(response) {
@@ -48,14 +63,6 @@ ZD.getInfo = function(ticketId) {
             info.user.id = user.id;
             info.user.name = user.name;
             info.user.email = user.email;
-
-            return ZD.getTicketMetrics(ticketId);
-        })
-        // Get the ticket's responses and reply time and add it to the {info} object
-        .then(function(response) {
-
-            info.ticket.replies = response.ticket_metric.replies;
-            info.ticket.reply_time_in_minutes = response.ticket_metric.reply_time_in_minutes.business;
 
             return info;
         });
