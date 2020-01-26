@@ -1,8 +1,6 @@
 'use strict';
 
-// var $ = require('jquery');
-
-const Zendesk = require('./contentScripts/ZendeskReader.js');
+const Zendesk = require('./contentScripts/ICCReader.js');
 const PageType = require('./contentScripts/PageType.js');
 
 const APIs = {

@@ -1,26 +1,25 @@
 'use strict';
 
-var PageType = {};
-var _ = require('lodash');
+const PageType = {};
 
 // Dependencies
-var Filters = require('./Filters');
-var ZendeskReader = require('./ZendeskReader');
+const Filters = require('./Filters');
+const ICCReader = require('./ICCReader');
 
 // Filters
-var matchHostname = Filters.matchHostname;
-var matchPathname = Filters.matchPathname;
-var endsInNumber = Filters.endsInNumber;
-var matchHostnames = Filters.matchHostnames;
-var and = Filters.and;
-var getNumberAtTheEnd = Filters.getNumberAtTheEnd;
+const matchHostname = Filters.matchHostname;
+const matchPathname = Filters.matchPathname;
+const endsInNumber = Filters.endsInNumber;
+const matchHostnames = Filters.matchHostnames;
+const and = Filters.and;
+const getNumberAtTheEnd = Filters.getNumberAtTheEnd;
 
 // Brands list
-var brands = {
-    zendesk: {
-        page: matchHostname('.zendesk.com'),
-        id: and(matchPathname('agent/tickets'), endsInNumber),
-        reader: ZendeskReader
+const brands = {
+    iccasap: {
+        page: matchHostname('iccasap.com'),
+        id: and(matchPathname('/page-links-'), endsInNumber),
+        reader: ICCReader
     }
 };
 
@@ -30,24 +29,22 @@ var brands = {
  * the name of the brand and the ticket id
  */
 PageType.getType = () => {
-    var hostname = document.location.host;
-    var pathname = document.location.pathname;
+    const { hostname, pathname } = document.location;
 
-    var result = {
-        isTicket: false,
+    let result = {
+        isICC: false,
         isValidDomain: false,
         domain: hostname,
         brand: undefined
     };
 
-    // Loop the object
-    _(brands).each(function(rules, brand) {
+    Object.entries(brands).forEach(([brand, rules]) => {
         // if the hostname matches with the brands
         // and the brand name continue, if not `return`
         if (rules.page(hostname)) {
             result.brand = brand;
         } else {
-            return;
+            return true;
         }
 
         // check if the pathname is a ticket and add the
@@ -57,14 +54,14 @@ PageType.getType = () => {
             result.isTicket = true;
             result.isValidDomain = true;
 
-            return false;
+            // return true;
         }
 
         // If the module has a legacy checker, run it and
         // save the results
         if (rules.reader.legacyCheck) {
             result = rules.reader.legacyCheck(result);
-            return false;
+            // return false;
         }
     });
 

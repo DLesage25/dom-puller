@@ -1,6 +1,6 @@
 'use strict';
 
-var Filters = {};
+const Filters = {};
 
 /**
  * A higher level function to create a matcher for a domain name
@@ -16,7 +16,7 @@ Filters.matchHostname = hostname => {
  */
 Filters.matchHostnames = hostnames => {
     return fullHostname => {
-        var match = false;
+        let match = false;
         hostnames.forEach(function(hostname) {
             if (fullHostname.lastIndexOf(hostname) > -1) {
                 match = true;
@@ -31,10 +31,10 @@ Filters.matchHostnames = hostnames => {
  * read a path and returns if it ends in a number
  */
 Filters.endsInNumber = pathname => {
-    var chunks = pathname.split('/');
+    let chunks = pathname.split('/');
     if (chunks.length < 1) return false;
 
-    var lastChunk = chunks[chunks.length - 1];
+    let lastChunk = chunks[chunks.length - 1];
     if (!Filters.isNumber(lastChunk)) return false;
 
     return true;
@@ -44,10 +44,10 @@ Filters.endsInNumber = pathname => {
  * get the number at the end of the url
  */
 Filters.getNumberAtTheEnd = pathname => {
-    var chunks = pathname.split('/');
+    let chunks = pathname.split('/');
     if (chunks.length < 1) return;
 
-    var lastChunk = chunks[chunks.length - 1];
+    let lastChunk = chunks[chunks.length - 1];
     if (!Filters.isNumber(lastChunk)) return;
 
     return lastChunk;
@@ -59,7 +59,7 @@ Filters.getNumberAtTheEnd = pathname => {
 Filters.isNumber = x => {
     if (isNaN(x)) return false;
 
-    var parsed = parseInt(x);
+    let parsed = parseInt(x);
     if (isNaN(parsed)) return false;
 
     return true;

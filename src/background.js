@@ -9,11 +9,9 @@ var config = {
                 unit: 'hours'
             }
         },
-        target: 'Ticket'
+        target: 'PageType'
     },
     PageCheck = require('./PageCheck.js');
-
-chrome.browserAction.onClicked.addListener(run);
 
 //setup function, gets the user's profile
 const run = () => {
@@ -22,15 +20,17 @@ const run = () => {
         console.log(object.email);
     });
 
-    // PageCheck()
-    //     .get(config.target, config.params)
-    //     .then(result => {
-    //         console.log(result);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
+    PageCheck()
+        .get(config.target, config.params)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
+
+chrome.browserAction.onClicked.addListener(run);
 
 // const setResult = data => {
 //     console.log(data);
