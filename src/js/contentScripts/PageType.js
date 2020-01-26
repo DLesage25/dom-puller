@@ -15,7 +15,6 @@ var matchHostnames = Filters.matchHostnames;
 var and = Filters.and;
 var getNumberAtTheEnd = Filters.getNumberAtTheEnd;
 
-
 // Brands list
 var brands = {
     zendesk: {
@@ -25,17 +24,15 @@ var brands = {
     }
 };
 
-
 /**
  * Get the type of the page depending on the brands list
  * It contains information about the page if its a ticket page,
  * the name of the brand and the ticket id
  */
-PageType.getType = function () {
-
+PageType.getType = () => {
     var hostname = document.location.host;
     var pathname = document.location.pathname;
-    
+
     var result = {
         isTicket: false,
         isValidDomain: false,
@@ -44,11 +41,9 @@ PageType.getType = function () {
     };
 
     // Loop the object
-    _(brands).each(function (rules, brand) {
-
+    _(brands).each(function(rules, brand) {
         // if the hostname matches with the brands
-        // and the brand and continue, if not `return`
-        // to loop with the next item on the brand list
+        // and the brand name continue, if not `return`
         if (rules.page(hostname)) {
             result.brand = brand;
         } else {
@@ -73,7 +68,7 @@ PageType.getType = function () {
         }
     });
 
-    // Returns the result with the isTicket flag, brand and id 
+    // Returns the result with the isTicket flag, brand and id
     return result;
 };
 

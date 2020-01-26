@@ -6,12 +6,11 @@ const Zendesk = require('./contentScripts/ZendeskReader.js');
 const PageType = require('./contentScripts/PageType.js');
 
 const APIs = {
-    'zendesk': Zendesk
+    zendesk: Zendesk
 };
 
 // Listen for messages and send the information back
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-
     console.log('ran');
 
     // This returns the type of the page
@@ -32,11 +31,10 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         let api = APIs[brand];
 
         if (api && type.isTicket) {
-            api.getInfo(id)
-                .then(function(data) {
-                    data.method = 'Ticket';
-                    sendResponse(data);
-                })
+            api.getInfo(id).then(function(data) {
+                data.method = 'Ticket';
+                sendResponse(data);
+            });
         }
 
         return true;
@@ -56,5 +54,4 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     }
 
     return true;
-
 });
