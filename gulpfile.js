@@ -11,12 +11,13 @@ var named = require('vinyl-named');
 var webpack = require('gulp-webpack');
 
 var files = {
-    js: ['./src/js/*.js','./src/js/contentScripts/*.js']
+    js: ['./src/*.js', './src/contentScripts/*.js']
 };
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src('.src/js/*.js')
+    return gulp
+        .src('.src/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -28,20 +29,24 @@ function webpackGenerator(id) {
         source = [source];
     }
 
-    return gulp.src(source)
+    return gulp
+        .src(source)
         .pipe(named())
-        .pipe(webpack({
-            devtool: '#inline-source-map'
-        }))
+        .pipe(
+            webpack({
+                devtool: '#inline-source-map'
+            })
+        )
         .pipe(gulp.dest('./public/build/js'));
 }
 
-
-gulp.task('js',    () => { return webpackGenerator('js')    });
+gulp.task('js', () => {
+    return webpackGenerator('js');
+});
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('./src/js/*.js', ['lint', 'js']);
+    gulp.watch('./src/*.js', ['lint', 'js']);
 });
 
 gulp.task('default', ['js', 'watch', 'lint']);

@@ -22,16 +22,16 @@ const run = () => {
         console.log(object.email);
     });
 
-    PageCheck()
-        .get(config.target, config.params)
-        .then(result => {
-            console.log(result);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    // PageCheck()
+    //     .get(config.target, config.params)
+    //     .then(result => {
+    //         console.log(result);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
 };
 
-const setResult = data => {
-    console.log(data);
-};
+// const setResult = data => {
+//     console.log(data);
+// };
