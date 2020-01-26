@@ -16,7 +16,7 @@ var config = {
 chrome.browserAction.onClicked.addListener(run);
 
 //setup function, gets the user's profile
-function run() {
+const run = () => {
     //email retrieve
     chrome.identity.getProfileUserInfo(object => {
         console.log(object.email);
@@ -24,14 +24,14 @@ function run() {
 
     PageCheck()
         .get(config.target, config.params)
-        .then(function(result) {
+        .then(result => {
             console.log(result);
         })
-        .catch(function(err) {
+        .catch(err => {
             console.log(err);
         });
-}
+};
 
-function setResult(data) {
+const setResult = data => {
     console.log(data);
-}
+};

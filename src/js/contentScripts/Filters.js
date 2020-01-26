@@ -6,7 +6,7 @@ var Filters = {};
  * A higher level function to create a matcher for a domain name
  */
 Filters.matchHostname = hostname => {
-    return function(fullHostname) {
+    return fullHostname => {
         return fullHostname.lastIndexOf(hostname) > -1;
     };
 };
@@ -15,7 +15,7 @@ Filters.matchHostname = hostname => {
  * A higher level function to create matcher for a list of domain names
  */
 Filters.matchHostnames = hostnames => {
-    return function(fullHostname) {
+    return fullHostname => {
         var match = false;
         hostnames.forEach(function(hostname) {
             if (fullHostname.lastIndexOf(hostname) > -1) {
@@ -69,7 +69,7 @@ Filters.isNumber = x => {
  * A higher level function to create a matcher for the path of the url
  */
 Filters.matchPathname = pathname => {
-    return function(fullPathname) {
+    return fullPathname => {
         return fullPathname.lastIndexOf(pathname) > -1;
     };
 };
@@ -78,7 +78,7 @@ Filters.matchPathname = pathname => {
  * Higher level "and" function
  */
 Filters.and = (a, b) => {
-    return function(arg) {
+    return arg => {
         return a(arg) && b(arg);
     };
 };

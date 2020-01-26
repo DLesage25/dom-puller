@@ -1,24 +1,22 @@
 {
     "manifest_version": 2,
-    "name": "Automated Ticket Allocator",
-    "description": "This extension extracts agent name and ticket ID per submission from Zendesk",
+    "name": "Ubiq Extracter",
+    "description": "Ubiq extension to extract information from multiple pages",
     "version": "1.0",
     "browser_action": {
         "default_icon": "img/icon.png",
         "default_title": "Click here!"
     },
     "background": {
-        "scripts": [
-            "./build/js/background.js"
-        ]
+        "scripts": ["./build/js/background.js"]
     },
     "permissions": [
-        "tabs", "activeTab", "storage",
-        "identity", "identity.email",
-        "https://accounts.google.com/o/oauth2/token",
-        "http://*.zendesk.com/", "https://*.zendesk.com/",
-        "http://*.desk.com/", "https://*.desk.com/",
-        "http://support.udemy.com/", "https://support.udemy.com/"
+        "tabs",
+        "activeTab",
+        "storage",
+        "identity",
+        "identity.email",
+        "https://accounts.google.com/o/oauth2/token"
     ],
     "oauth2": {
         "client_id": "943332422854-374br5pp9sgeg91qd8imkd2ohsj93hfd.apps.googleusercontent.com",
@@ -27,10 +25,12 @@
             "https://www.googleapis.com/auth/userinfo.profile"
         ]
     },
-    "content_scripts": [{
-        "matches": ["<all_urls>"],
-        "js": ["./build/js/jquery-2.2.4.min.js", "./build/js/content.js"],
-        "run_at": "document_end"
-    }],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["./build/js/jquery-2.2.4.min.js", "./build/js/content.js"],
+            "run_at": "document_end"
+        }
+    ],
     "key": "bidkkfbhfkenimbpplgpfoaibnfgaegc"
 }
