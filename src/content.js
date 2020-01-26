@@ -11,6 +11,8 @@ const APIs = {
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
     console.log('ran');
 
+    console.log({ msg });
+
     // This returns the type of the page
     if (msg.method === 'PageType') {
         let type = PageType.getType();

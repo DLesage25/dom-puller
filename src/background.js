@@ -3,12 +3,7 @@
 //basic config object
 var config = {
         push_url: 'http://requestb.in/17h1nva1',
-        params: {
-            threshold: {
-                amount: 12,
-                unit: 'hours'
-            }
-        },
+        params: {},
         target: 'PageType'
     },
     PageCheck = require('./PageCheck.js');
@@ -23,7 +18,7 @@ const run = () => {
     PageCheck()
         .get(config.target, config.params)
         .then(result => {
-            console.log(result);
+            console.log({ result });
         })
         .catch(err => {
             console.log(err);

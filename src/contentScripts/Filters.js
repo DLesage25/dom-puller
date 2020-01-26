@@ -7,6 +7,7 @@ const Filters = {};
  */
 Filters.matchHostname = hostname => {
     return fullHostname => {
+        console.log({ hostname, fullHostname });
         return fullHostname.lastIndexOf(hostname) > -1;
     };
 };

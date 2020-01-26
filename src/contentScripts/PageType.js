@@ -49,6 +49,8 @@ PageType.getType = () => {
 
         // check if the pathname is a ticket and add the
         // number to the result
+
+        console.log(rules.id(pathname));
         if (rules.id(pathname)) {
             result.id = getNumberAtTheEnd(pathname);
             result.isTicket = true;

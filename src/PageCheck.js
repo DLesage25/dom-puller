@@ -9,7 +9,7 @@ module.exports = () => {
                 let data = { method: method, params: params };
 
                 // Send the message {data} to the page and resolves the result back
-                chrome.tabs.sendMessage(tab.id, data, function(result) {
+                chrome.tabs.sendMessage(tab.id, data, result => {
                     if (!result) {
                         let lastError = chrome.extension.lastError.message;
                         console.log(lastError);
