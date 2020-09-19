@@ -10,7 +10,7 @@ const APIs = {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     console.log({ msg });
 
-    sendResponse('sad');
+    // sendResponse('sad');
 
     // This returns the type of the page
     if (msg.method === 'PageType') {
@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
     // Returns the ticket info, this message will only be recieved when
     // the user is in a ticket page, so there's no need to validate it
-    if (msg.method === 'Ticket') {
+    if (msg.method === 'PageData') {
         let type = PageType.getType();
         let id = type.id;
 

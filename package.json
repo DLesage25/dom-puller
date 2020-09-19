@@ -5,8 +5,7 @@
     "main": "background.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "rm -rf public/build && gulp",
-        "build2": "rm -rf public/dist && webpack"
+        "build": "rm -rf public/dist && webpack"
     },
     "author": "",
     "license": "ISC",
