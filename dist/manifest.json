@@ -8,7 +8,7 @@
         "default_title": "Click here!"
     },
     "background": {
-        "scripts": ["./build/js/background.js"]
+        "scripts": ["./build/background.js"]
     },
     "permissions": [
         "tabs",
@@ -28,7 +28,7 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["./build/js/jquery-2.2.4.min.js", "./build/js/content.js"],
+            "js": ["./build/jquery-2.2.4.min.js", "./build/content.js"],
             "run_at": "document_end"
         }
     ],

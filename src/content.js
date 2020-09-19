@@ -4,14 +4,13 @@ const Zendesk = require('./contentScripts/ICCReader.js');
 const PageType = require('./contentScripts/PageType.js');
 
 const APIs = {
-    zendesk: Zendesk
+    zendesk: Zendesk,
 };
-
 // Listen for messages and send the information back
-chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-    console.log('ran');
-
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     console.log({ msg });
+
+    sendResponse('sad');
 
     // This returns the type of the page
     if (msg.method === 'PageType') {
@@ -31,7 +30,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
         let api = APIs[brand];
 
         if (api && type.isTicket) {
-            api.getInfo(id).then(function(data) {
+            api.getInfo(id).then(function (data) {
                 data.method = 'Ticket';
                 sendResponse(data);
             });

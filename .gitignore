@@ -95,10 +95,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-public/build/js/content.js
-public/build/js/main.js
-public/build/js/vendor.js
-public/build/js/popup.js
-public/build/js/dashboard.js
+dist/build/*
 
 *.map
